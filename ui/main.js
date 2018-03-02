@@ -12,7 +12,7 @@ function moveright() {
     img.style.marginLeft = marginLeft + 'px';
 }
 img.onclick = function () {
-    var interval = setInterval(moveright, 100); //Every 100ms, apply this moveright function
+    var interval = setInterval(moveright, 50); //Every 50ms, apply this moveright function
     img.style.marginLeft = '100px';
 }; 
     

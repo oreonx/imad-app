@@ -3,6 +3,7 @@ var morgan = require('morgan');
 var path = require('path');
 var http = require('http');
 var Pool = require('pg').Pool;
+var app = require('express').App();
 
 var config = {
     user: 'meghadribiswas',

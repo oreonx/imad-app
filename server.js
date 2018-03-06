@@ -1,6 +1,17 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+var Pool = require('pg').pool;
+
+var config = {
+    user: 'meghadribiswas',
+    database: 'meghadribiswas',
+    host: 'db.imad.hasura-app.io',
+    port: '5432',
+    password: process.env.DB_PASSWORD
+    };
+    
+
 
 var app = express();
 app.use(morgan('combined'));
@@ -169,11 +180,25 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/:articleName', function (req, res) {
+app.get('/articles/:articleName', function (req, res) {
     //articleName == article-one
     //articles[articleName] == {} content object for article one
   var articleName = req.params.articleName;
-  res.send(createTemplate(articles[articleName])); 
+  pool.query("SELECT * FROM article WHERE title = " + req.params.articleName, function (err, result) {
+     if (err) {
+         res.status(500).send(err.toString());
+    } 
+    else {
+      if (results.rows.length === 0) {
+          res.status(404).send('Article not found!');
+      } 
+      else {
+          var articleData = result.rows[0];
+          res.send(createTemplate(articleData));
+      }        
+    } 
+  });
+  res.send(createTemplate(articleData)); 
 });
 
 app.get('/ui/style.css', function (req, res) {

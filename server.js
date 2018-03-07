@@ -180,7 +180,7 @@ app.get('/', function (req, res) {
 
 var pool = Pool(config);
  
-app.get('/articles/:articlename', function (req, res) {
+app.get('/articles/:articleName', function (req, res) {
  
   pool.query("SELECT * FROM article WHERE title = "+[req.params.articlename],function(err,result) {
        if(err)

@@ -195,8 +195,8 @@ app.get('/articles/:articleName', function (req, res) {
            }
            else
            {
-               var articledata=result.rows[0];
-               res.send(templates(articledata));
+               var articleData=result.rows[0];
+               res.send(templates(articleData));
            }
        }
   });

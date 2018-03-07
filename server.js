@@ -183,16 +183,16 @@ var pool = Pool(config);
 app.get('/articles/:articleName', function (req, res) {
     var articleName = req.params.articleName;
  
-  pool.query("SELECT * FROM article WHERE title = '"+req.params.articleName+"'",function(err,result) {
+  pool.query("SELECT * FROM article WHERE title = '"+req.params.articleName+"'", function(err,result) {
        if(err)
        {
-           res.status(550).send(err.toString());
+           res.status(500).send(err.toString());
        }
        else
        {
            if(res.rows.length===0)
            {
-               res.status(404).send("Article is not here.");
+               res.status(404).send("Article not found.");
            }
            else
            {
